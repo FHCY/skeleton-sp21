@@ -11,7 +11,7 @@ public class TestArrayDequeEC {
     public void test_removeFirst() {
         ArrayDequeSolution<Integer> L1 = new ArrayDequeSolution<>();
         StudentArrayDeque<Integer> L2 = new StudentArrayDeque<>();
-        int N = 500;
+        int N = 5000;
         int randVal = StdRandom.uniform(0, 100);
         String msg = "";
         for (int i = 0; i <= N; i++) {
