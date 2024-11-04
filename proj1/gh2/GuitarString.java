@@ -18,12 +18,8 @@ public class GuitarString {
 
     /* Create a guitar string of the given frequency.  */
     public GuitarString(double frequency) {
-        // TODO: Create a buffer with capacity = SR / frequency. You'll need to
-        //       cast the result of this division operation into an int. For
-        //       better accuracy, use the Math.round() function before casting.
-        //       Your should initially fill your buffer array with zeros.
         buffer = new ArrayDeque<>();
-        int capacity = (int) Math.round(SR / DECAY);
+        int capacity = (int) Math.round(SR / frequency);
         for (int i = 0; i < capacity; i++) {
             buffer.addLast(0.0);
         }
@@ -44,8 +40,8 @@ public class GuitarString {
      */
     public void tic() {
         double oneSample = buffer.removeFirst();
-        double TwoSample = buffer.get(0);
-        double newSample = (oneSample + TwoSample) * 0.5 * DECAY;
+        double twoSample = buffer.get(0);
+        double newSample = (oneSample + twoSample) * 0.5 * DECAY;
         buffer.addLast(newSample);
     }
 

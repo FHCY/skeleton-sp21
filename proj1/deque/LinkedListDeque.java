@@ -1,6 +1,7 @@
 package deque;
 
 import java.util.Iterator;
+import java.util.Objects;
 
 public class LinkedListDeque<T> implements Deque<T>, Iterable<T> {
     private IntNode sentinel;
@@ -149,12 +150,13 @@ public class LinkedListDeque<T> implements Deque<T>, Iterable<T> {
             return false;
         }
 
-        if ( ((Deque<?>)other).size() != this.size()) {
+        Deque<?> otherDeque = (Deque<?>) other;
+        if (otherDeque.size() != this.size()) {
             return false;
         }
 
-        for (int i = 0; i < size; i++) {
-            if (((Deque<?>)other).get(i) != get(i)) {
+        for (int i = 0; i < size(); i++) {
+            if (!Objects.equals(get(i), otherDeque.get(i))) {
                 return false;
             }
         }
