@@ -1,5 +1,7 @@
 package bstmap;
 
+import edu.princeton.cs.algs4.BST;
+
 import java.util.Set;
 
 /* Your implementation BSTMap should implement this interface. To do so,
