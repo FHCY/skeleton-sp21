@@ -2,6 +2,7 @@ package bstmap;
 
 import java.util.Iterator;
 import java.util.Set;
+import java.util.TreeSet;
 
 public class BSTMap<K extends Comparable<K> , V>implements Map61B<K, V> {
     private int size = 0;
@@ -85,6 +86,9 @@ public class BSTMap<K extends Comparable<K> , V>implements Map61B<K, V> {
     }
 
     private BSTNode search(K key, BSTNode root) {
+        if (root == null) {
+            return null;
+        }
         if (key.equals(root.key)) {
             return root;
         } else if (root.key.compareTo(key) > 0) {
@@ -95,7 +99,10 @@ public class BSTMap<K extends Comparable<K> , V>implements Map61B<K, V> {
     }
 
     private BSTNode searchParent(K key, BSTNode root) {
-        if (root.left.key.equals(key) || root.right.key.equals(key)) {
+        if (root == null) {
+            return null;
+        }
+        if (root.left != null && root.left.key.equals(key) || root.right != null && root.right.key.equals(key)) {
             return root;
         } else if (root.key.compareTo(key) > 0) {
             return search(key, root.left);
@@ -158,31 +165,25 @@ public class BSTMap<K extends Comparable<K> , V>implements Map61B<K, V> {
 
     @Override
     public Set<K> keySet() {
-        throw new UnsupportedOperationException();
+        Set<K> keys = new TreeSet<>();
+        addKeys(root, keys);
+        return keys;
+    }
+
+    private void addKeys(BSTNode root, Set<K> keys) {
+        if(root == null) {
+            return;
+        }
+        addKeys(root.left, keys);
+        keys.add(root.key);
+        addKeys(root.right, keys);
     }
 
     @Override
     public Iterator<K> iterator() {
-        return new BSTMap.BSTMapIter();
+        return keySet().iterator();
     }
 
-    private class BSTMapIter implements Iterator<K> {
-        private BSTNode cur;
-
-        public BSTMapIter() {
-            throw new UnsupportedOperationException();
-        }
-
-        @Override
-        public boolean hasNext() {
-            throw new UnsupportedOperationException();
-        }
-
-        @Override
-        public K next() {
-            throw new UnsupportedOperationException();
-        }
-    }
 
     public void printInOrder() {
         printInOrder(root);
